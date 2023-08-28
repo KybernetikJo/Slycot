@@ -1,23 +1,14 @@
 set(PYSOURCE
 
   __init__.py
-  test_ab01.py
-  test_ab04md.py
-  test_ab08n.py
-  test_ag08bd.py
-  test_examples.py
-  test_exceptions.py
-  test_mb.py
-  test_mc.py
-  test_sb.py
-  test_analysis.py
-  test_transform.py
-  test_sg02ad.py
-  test_sg03ad.py
-  test_tb05ad.py
-  test_td04ad.py
-  test_tg01ad.py
-  test_tg01fd.py )
+  analysis/test_ab01.py
+  analysis/test_ab04md.py
+  analysis/test_ab08n.py
+  analysis/test_ag08bd.py
+  analysis/test_ab13bd.py
+  analysis/test_ab13md.py
+  analysis/test_ab08bd.py
+  analysis/test_analysis.py)
 
 install(FILES ${PYSOURCE}
-        DESTINATION slycot/tests)
+        DESTINATION slycot/tests/analysis)
