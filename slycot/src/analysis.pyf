@@ -3,9 +3,9 @@ subroutine ab01nd(jobz,n,m,a,lda,b,ldb,ncont,indcon,nblk,z,ldz,tau,tol,iwork,dwo
     character :: jobz
     integer check(n>0) :: n
     integer check(m>0) :: m
-    double precision intent(in,out),dimension(n,n),depend(n) :: a
+    double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
-    double precision intent(in,out),dimension(n,m),depend(n,m) :: b
+    double precision intent(in,out,copy),dimension(n,m),depend(n,m) :: b
     integer intent(hide),depend(b) :: ldb=shape(b,0)
     integer intent(out) :: ncont
     integer intent(out) :: indcon
@@ -201,7 +201,7 @@ subroutine ab09ad(dico,job,equil,ordsel,n,m,p,nr,a,lda,b,ldb,c,ldc,hsv,tol,iwork
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    integer intent(in,out) :: nr
+    integer intent(in,out,copy) :: nr
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
     double precision intent(in,out,copy),dimension(n,m),depend(n,m) :: b
@@ -223,7 +223,7 @@ subroutine ab09ax(dico,job,ordsel,n,m,p,nr,a,lda,b,ldb,c,ldc,hsv,t,ldt,ti,ldti,t
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    integer intent(in,out) :: nr
+    integer intent(in,out,copy) :: nr
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
     double precision intent(in,out,copy),dimension(n,m),depend(n,m) :: b
@@ -250,7 +250,7 @@ subroutine ab09bd(dico,job,equil,ordsel,n,m,p,nr,a,lda,b,ldb,c,ldc,d,ldd,hsv,tol
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    integer intent(in,out) :: nr
+    integer intent(in,out,copy) :: nr
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
     double precision intent(in,out,copy),dimension(n,m),depend(n,m) :: b
@@ -276,7 +276,7 @@ subroutine ab09md(dico,job,equil,ordsel,n,m,p,nr,alpha,a,lda,b,ldb,c,ldc,ns,hsv,
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    integer intent(in,out) :: nr
+    integer intent(in,out,copy) :: nr
     double precision intent(in):: alpha
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
@@ -301,7 +301,7 @@ subroutine ab09nd(dico,job,equil,ordsel,n,m,p,nr,alpha,a,lda,b,ldb,c,ldc,d,ldd,n
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    integer intent(in,out) :: nr
+    integer intent(in,out,copy) :: nr
     double precision intent(in):: alpha
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
@@ -351,7 +351,7 @@ subroutine ab13dd(dico,jobe,equil,jobd,n,m,p,fpeak,a,lda,e,lde,b,ldb,c,ldc,d,ldd
     integer check(n>=0) :: n
     integer check(m>=0) :: m
     integer check(p>=0) :: p
-    double precision intent(in,out),dimension(2) :: fpeak
+    double precision intent(in,out,copy),dimension(2) :: fpeak
     double precision dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda = shape(a,0)
     double precision dimension(n,n),depend(n) :: e
@@ -379,7 +379,7 @@ subroutine ab13md(fact, n, z, ldz, m, nblock, itype, x, bound, d, g, iwork, dwor
   integer intent(hide, in), depend(nblock) :: m = len(nblock)
   integer intent(in),dimension(m) :: nblock
   integer intent(in),dimension(m), depend(m) :: itype
-  double precision intent(in,out),dimension(2*m-1) :: x ! dim m+mr-1; mr<=m
+  double precision intent(in,out,copy),dimension(2*m-1) :: x ! dim m+mr-1; mr<=m
   double precision intent(out) :: bound
   double precision intent(out),dimension(n),depend(n) :: d
   double precision intent(out),dimension(n),depend(n) :: g

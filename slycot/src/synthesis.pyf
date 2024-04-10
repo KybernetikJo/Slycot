@@ -36,7 +36,7 @@ subroutine sb02md(dico,hinv,uplo,scal,sort,n,a,lda,g,ldg,q,ldq,rcond,wr,wi,s,lds
 	integer intent(hide),depend(a) :: lda=shape(a,0)
 	double precision dimension(n,n),depend(n) :: g
 	integer intent(hide),depend(g) :: ldg=shape(g,0)
-	double precision intent(in,out),dimension(n,n),depend(n) :: q
+	double precision intent(in,out,copy),dimension(n,n),depend(n) :: q
 	integer intent(hide),depend(q) :: ldq=shape(q,0)
 	double precision intent(out),dimension(2*n,2*n),depend(n) :: u
 	integer intent(hide),depend(u) :: ldu=shape(u,0)
@@ -413,7 +413,7 @@ subroutine sb10ad(job,n,m,np,ncon,nmeas,gamma,a,lda,b,ldb,c,ldc,d,ldd,ak,ldak,bk
     ! m-ncon>=nmeas
     ! np-nmeas>=ncon
     integer check(nmeas>=0 && nmeas<=min(m,np)-ncon), depend(m,np,ncon) :: nmeas
-    double precision intent(in,out) :: gamma            
+    double precision intent(in,out,copy) :: gamma            
     double precision dimension(n,n), depend(n) :: a
     integer intent(hide), depend(a) :: lda=shape(a,0)
     double precision dimension(n,m), depend(n,m) :: b
@@ -460,7 +460,7 @@ subroutine sb10dd(n,m,np,ncon,nmeas,gamma,a,lda,b,ldb,c,ldc,d,ldd,ak,ldak,bk,ldb
     ! m-ncon>=nmeas
     ! np-nmeas>=ncon
     integer check(nmeas>=0 && nmeas<=min(m,np)-ncon), depend(m,np,ncon) :: nmeas
-    double precision intent(in,out) :: gamma            
+    double precision intent(in,out,copy) :: gamma            
     double precision dimension(n,n), depend(n) :: a
     integer intent(hide), depend(a) :: lda=shape(a,0)
     double precision dimension(n,m), depend(n,m) :: b
@@ -603,15 +603,15 @@ subroutine sg03ad(dico,job,fact,trans,uplo,n,a,lda,e,lde,q,ldq,z,ldz,x,ldx,scale
     character :: trans
     character :: uplo
     integer check(n>=0) :: n
-    double precision intent(in,out), dimension(n,n), depend(n) :: a
+    double precision intent(in,out,copy), dimension(n,n), depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
-    double precision intent(in,out), dimension(n,n), depend(n) :: e
+    double precision intent(in,out,copy), dimension(n,n), depend(n) :: e
     integer intent(hide),depend(e) :: lde=shape(e,0)
-    double precision intent(in,out), dimension(n,n), depend(n) :: q
+    double precision intent(in,out,copy), dimension(n,n), depend(n) :: q
     integer intent(hide),depend(q) :: ldq=shape(q,0)
-    double precision intent(in,out), dimension(n,n), depend(n) :: z
+    double precision intent(in,out,copy), dimension(n,n), depend(n) :: z
     integer intent(hide),depend(z) :: ldz=shape(z,0)
-    double precision intent(in,out), dimension(n,n), depend(n) :: x
+    double precision intent(in,out,copy), dimension(n,n), depend(n) :: x
     integer intent(hide),depend(x) :: ldx=shape(x,0)
     double precision intent(out) :: scale
     double precision intent(out) :: sep

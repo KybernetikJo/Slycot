@@ -6,7 +6,7 @@ subroutine tb01id(job,n,m,p,maxred,a,lda,b,ldb,c,ldc,scale,info) ! in TB01ID.f
     integer required,check(n>0) :: n
     integer required,check(m>0) :: m
     integer required,check(p>0) :: p
-    double precision intent(in,out),check(maxred<=0 || maxred>1) :: maxred
+    double precision intent(in,out,copy),check(maxred<=0 || maxred>1) :: maxred
     double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
     integer intent(hide),depend(a) :: lda=shape(a,0)
     double precision intent(in,out,copy),dimension(n,m),depend(n,m) :: b
@@ -23,11 +23,11 @@ subroutine tb03ad_l(leri,equil,n,m,p,a,lda,b,ldb,c,ldc,d,ldd,nr,index_bn,pcoeff,
 	integer check(n>0) :: n
 	integer check(m>0) :: m
 	integer check(p>0) :: p
-	double precision intent(in,out),dimension(n,n),depend(n) :: a
+	double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
 	integer intent(hide),depend(a) :: lda=shape(a,0)
-	double precision intent(in,out),dimension(n,max(m,p)),depend(n,m,p) :: b
+	double precision intent(in,out,copy),dimension(n,max(m,p)),depend(n,m,p) :: b
 	integer intent(hide),depend(b) :: ldb=shape(b,0)
-	double precision intent(in,out),dimension(max(m,p),n),depend(n,m,p) :: c
+	double precision intent(in,out,copy),dimension(max(m,p),n),depend(n,m,p) :: c
 	integer intent(hide),depend(c) :: ldc=shape(c,0)
 	double precision dimension(max(m,p),max(m,p)),depend(m,p) :: d
 	integer intent(hide),depend(d) :: ldd=shape(d,0)
@@ -55,11 +55,11 @@ subroutine tb03ad_r(leri,equil,n,m,p,a,lda,b,ldb,c,ldc,d,ldd,nr,index_bn,pcoeff,
 	integer check(n>0) :: n
 	integer check(m>0) :: m
 	integer check(p>0) :: p
-	double precision intent(in,out),dimension(n,n),depend(n) :: a
+	double precision intent(in,out,copy),dimension(n,n),depend(n) :: a
 	integer intent(hide),depend(a) :: lda=shape(a,0)
-	double precision intent(in,out),dimension(n,max(m,p)),depend(n,m,p) :: b
+	double precision intent(in,out,copy),dimension(n,max(m,p)),depend(n,m,p) :: b
 	integer intent(hide),depend(b) :: ldb=shape(b,0)
-	double precision intent(in,out),dimension(max(m,p),n),depend(n,m,p) :: c
+	double precision intent(in,out,copy),dimension(max(m,p),n),depend(n,m,p) :: c
 	integer intent(hide),depend(c) :: ldc=shape(c,0)
 	double precision dimension(max(m,p),max(m,p)),depend(m,p) :: d
 	integer intent(hide),depend(d) :: ldd=shape(d,0)
@@ -236,10 +236,10 @@ subroutine tc01od_l(leri,m,p,indlim,pcoeff,ldpco1,ldpco2,qcoeff,ldqco1,ldqco2,in
 	integer check(m>0) :: m
 	integer check(p>0) :: p
 	integer check(indlim>0) :: indlim
-	double precision intent(in,out),dimension(p,p,indlim),depend(p,indlim) :: pcoeff
+	double precision intent(in,out,copy),dimension(p,p,indlim),depend(p,indlim) :: pcoeff
 	integer intent(hide),depend(pcoeff) :: ldpco1=shape(pcoeff,0)
 	integer intent(hide),depend(pcoeff) :: ldpco2=shape(pcoeff,1)
-	double precision intent(in,out),dimension(max(m,p),max(m,p),indlim),depend(m,p,indlim) :: qcoeff
+	double precision intent(in,out,copy),dimension(max(m,p),max(m,p),indlim),depend(m,p,indlim) :: qcoeff
 	integer intent(hide),depend(qcoeff) :: ldqco1=shape(qcoeff,0)
 	integer intent(hide),depend(qcoeff) :: ldqco2=shape(qcoeff,1)
 	integer intent(out) :: info
@@ -270,7 +270,7 @@ subroutine tc04ad_l(leri,m,p,index_bn,pcoeff,ldpco1,ldpco2,qcoeff,ldqco1,ldqco2,
 	double precision required,dimension(p,m,*),depend(m,p) :: qcoeff
 	integer intent(hide),depend(qcoeff) :: ldqco1=shape(qcoeff,0)
 	integer intent(hide),depend(qcoeff) :: ldqco2=shape(qcoeff,1)
-	integer intent(in,out) :: n != sum(index_bn)
+	integer intent(in,out,copy) :: n != sum(index_bn)
 	double precision intent(out) :: rcond
 	double precision intent(out),dimension(n,n),depend(n) :: a
 	integer intent(hide),depend(a) :: lda=shape(a,0)
@@ -297,7 +297,7 @@ subroutine tc04ad_r(leri,m,p,index_bn,pcoeff,ldpco1,ldpco2,qcoeff,ldqco1,ldqco2,
 	double precision required,dimension(max(m,p),max(m,p),*),depend(m,p) :: qcoeff
 	integer intent(hide),depend(qcoeff) :: ldqco1=shape(qcoeff,0)
 	integer intent(hide),depend(qcoeff) :: ldqco2=shape(qcoeff,1)
-	integer intent(in,out) :: n != sum(index_bn)
+	integer intent(in,out,copy) :: n != sum(index_bn)
 	double precision intent(out) :: rcond
 	double precision intent(out),dimension(n,n),depend(n) :: a
 	integer intent(hide),depend(a) :: lda=shape(a,0)
@@ -323,7 +323,7 @@ subroutine td04ad_r(rowcol,m,p,index_bn,dcoeff,lddcoe,ucoeff,lduco1,lduco2,nr,a,
     double precision intent(in,copy),dimension(max(1,p),max(1,m),*),depend(p,m) :: ucoeff
     integer intent(hide),depend(ucoeff) :: lduco1=shape(ucoeff,0)
     integer intent(hide),depend(ucoeff) :: lduco2=shape(ucoeff,1)
-    integer intent(in,out) :: nr !=sum(index_bn)
+    integer intent(in,out,copy) :: nr !=sum(index_bn)
     double precision intent(out),dimension(max(1,nr),max(1,nr)),depend(nr) :: a
     integer intent(hide),depend(a) :: lda = shape(a,0)
     double precision intent(out),dimension(max(1,nr),max(m,p)),depend(nr,m,p) :: b
@@ -349,7 +349,7 @@ subroutine td04ad_c(rowcol,m,p,index_bn,dcoeff,lddcoe,ucoeff,lduco1,lduco2,nr,a,
     double precision intent(in,copy),dimension(max(1,max(m,p)),max(1,max(m,p)),*),depend(p,m) :: ucoeff
     integer intent(hide),depend(ucoeff) :: lduco1=shape(ucoeff,0)
     integer intent(hide),depend(ucoeff) :: lduco2=shape(ucoeff,1)
-    integer intent(in,out) :: nr != sum(index_bn)
+    integer intent(in,out,copy) :: nr != sum(index_bn)
     double precision intent(out),dimension(max(1,nr),max(1,nr)),depend(nr) :: a
     integer intent(hide),depend(a) :: lda = shape(a,0)
     double precision intent(out),dimension(max(1,nr),max(m,p)),depend(nr,m,p) :: b
